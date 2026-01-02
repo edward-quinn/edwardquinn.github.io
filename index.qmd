@@ -4,3 +4,19 @@ subtitle: "You can find my projects, technical notes, publications, and resume o
 ---
 
 
+
+```{r}
+
+library(tidyverse)
+
+```
+
+
+```{r}
+
+ggplot(diamonds, aes(x = carat, y = price)) +
+    geom_point() +
+    theme_minimal() +
+    labs(title = "Placeholder Graph")
+
+```
