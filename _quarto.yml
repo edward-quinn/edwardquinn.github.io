@@ -1,0 +1,29 @@
+project:
+  title: "edwardquinn.github.io"
+  type: website
+  output-dir: docs
+
+website:
+  title: "Edward Quinn, Ph.D, MPH"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
+      - text: "Data Science Projects"
+        href: data_science_projects.qmd
+      - text: "Professional Development"
+        href: professional_development.qmd
+      - text: "Publications"
+        href: "publications.qmd"
+      - text: "Resume"
+        href: resume.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+
