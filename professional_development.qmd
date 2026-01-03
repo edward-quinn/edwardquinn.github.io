@@ -1,14 +1,12 @@
 ---
 title: "Technical Notes"
-subtitle: "Below are links to repositories containing my notes on technical books I have read for professional development"
-date: today
+subtitle: "Below are links to websites containing my notes on data science books I have read for professional development."
+bibliography: professional_development.bib
 ---
 
-# Technical Publication Notes
+# Books
 
-## Books
+## Advanced R
 
-## Advanced R by Hadley Wickham
-- [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/)
-
-## Articles
+-   @wickham_advanced_2019
+-   [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/) 
