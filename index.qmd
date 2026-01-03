@@ -6,6 +6,7 @@ subtitle: "You can find my projects, technical notes, publications, and resume o
 
 
 ```{r}
+#| include: false
 
 library(tidyverse)
 
@@ -13,10 +14,84 @@ library(tidyverse)
 
 
 ```{r}
+#| include: false
 
-ggplot(diamonds, aes(x = carat, y = price)) +
-    geom_point() +
-    theme_minimal() +
-    labs(title = "Placeholder Graph")
+df <- tibble(
+  activity = c(
+    "Graduate Research Assistant", "Graduate Research Assistant", "Human Biomarkers Researcher",
+    "Assistant Research Specialist", "MA in Medical Anthropology", "PhD in Biological Anthropology",
+    "Graduate Research Assistant", "Data Analyst", "Graduate Research Assistant",
+    "Senior Data Analyst", "Compliance and Data Officer", "Data Science Consultant",
+    "MPH Epidemiology Track", "Statistician", "World Travel"
+  ),
+  start_date = c(
+    "August 2014", "May 2015", "May 2016", "September 2016", "August 2014", "August 2018",
+    "August 2018", "June 2021", "August 2018", "March 2023", "May 2024", "May 2024", "August 2019",
+    "October 2025", "April 2025"
+  ),
+  end_date = c(
+    "December 2014", "May 2016", "August 2016", "June 2018", "May 2016", "December 2022",
+    "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024", "December 2021", "February 2026", "September 2025"
+  ),
+  activity_type = c(
+    "Research", "Research", "Research", "Research", "Education", "Education",
+    "Research", "Data Analysis", "Research", "Data Analysis", "Data Analysis",
+    "Data Analysis", "Education", "Data Analysis", "Fun"
+  )
+) |> 
+  mutate(
+    start_date = parse_date_time(paste0(start_date, "-01"), orders = "B Y-d"),
+    end_date   = parse_date_time(paste0(end_date, "-01"), orders = "B Y-d")
+  ) |> 
+  arrange(desc(start_date))
+
+df
+
+
+```
+
+
+```{r}
+#| echo: false
+
+df_plot <- df |> 
+  mutate(
+    activity = fct_reorder(activity, start_date)
+  )
+
+ggplot(df_plot, aes(
+  y = activity,
+  x = start_date,
+  xend = end_date,
+  color = activity_type
+)) +
+  geom_segment(
+    linewidth = 6,
+    lineend = "round"
+  ) +
+  scale_x_date(
+    date_labels = "%Y",
+    date_breaks = "2 years",
+    expand = expansion(mult = c(0.01, 0.05))
+  ) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Professional and Academic Timeline",
+    subtitle = "Education, Research, and Data Science Roles",
+    x = NULL,
+    y = NULL,
+    color = "Activity Type"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(size = 11),
+    axis.text.x = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(color = "grey40"),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
 
 ```
