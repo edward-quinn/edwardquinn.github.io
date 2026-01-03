@@ -1,3 +1,12 @@
 ---
 title: "my book notes page"
 ---
+
+# Technical Publication Notes
+
+## Books
+
+## Advanced R by Hadley Wickham
+- [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/)
+
+## Articles
