@@ -8,5 +8,4 @@ bibliography: professional_development.bib
 
 ## Advanced R
 
--   @wickham_advanced_2019
--   [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/) 
+-   [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/) covering @wickham_advanced_2019.
