@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\nggplot(diamonds, aes(x = carat, y = price)) +\n    geom_point() +\n    theme_minimal() +\n    labs(title = \"Placeholder Graph\")"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Published Works",
+    "section": "",
+    "text": "Title\n\n\n\nAuthors\n\n\n\nDate\n\n\n\nJournal\n\n\n\n\n\n\n\n\nEpigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees\n\n\nMulligan, CJ; Quinn, EB; Hamadmad, D; Dutton, CL; Nevell, L; Binder, AM; Panter-Brick, C; Dajani, R\n\n\nFeb 27, 2025\n\n\nScientific Reports\n\n\n\n\n\n\nAssociations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo\n\n\nHsiao, CJ; Quinn, EB; Maisha, FM; Nevell, LD; Mulligan, CJ\n\n\nOct 27, 2023\n\n\nAmerican Journal of Biological Anthropology\n\n\n\n\n\n\nEffect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial\n\n\nQuinn, EB; LeLaurin, JH; Eliazar-Macke, ND; Orozco, T; Montague, M; Freytes, IM; Uphold, CR\n\n\nFeb 27, 2023\n\n\nClincial Rehabilitation\n\n\n\n\n\n\nMaternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome\n\n\nDutton, CL; Maisha, FM; Quinn, EB; Morales, KL; Moore, JM; Mulligan, CJ\n\n\nApr 7, 2023\n\n\nMicroorganisms\n\n\n\n\n\n\nPrenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation\n\n\nQuinn, EB; Hsiao, CJ; Maisha, FM; Mulligan, CJ\n\n\nJun 10, 2023\n\n\nEpigenetics\n\n\n\n\n\n\nLow birthweight is associated with epigenetic age acceleration in the first 3 years of life\n\n\nQuinn, EB; Hsiao, CJ; Maisha, FM; Mulligan, CJ\n\n\nJun 30, 2023\n\n\nEvolution, Medicine, and Public Health\n\n\n\n\n\n\nThe social patterning of vicarious discrimination: Implications for health equity\n\n\nQuinn, EB; Ross, JD; Boston, PQ; HEAT Steering Committee; Mulligan, CJ; Gravlee, CC\n\n\nJul 22, 2023\n\n\nSocial Science & Medicine\n\n\n\n\n\n\nAssociations between perceived discrimination and immune cell composition in the Jackson Heart Study\n\n\nAronoff, JE; Quinn, EB; Forde, AT; Glover, LM; Reiner, A; McDade, TW; Sims, M\n\n\nApr 2, 2022\n\n\nBrain, Behavior, and Immunity\n\n\n\n\n\n\nRegion-specific regulation of stem cell-driven regeneration in tapeworms\n\n\nRozario, T; Quinn, EB; Wang, J; Davis, RE; Newmark, PA\n\n\nJul 24, 2019\n\n\neLife\n\n\n\n\n\n\nNo matching items"
+  }
+]

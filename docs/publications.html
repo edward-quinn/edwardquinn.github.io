@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>My projects page – Edward Quinn, Ph.D, MPH</title>
+<title>Published Works – Edward Quinn, Ph.D, MPH</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-authors','listing-date','listing-journal',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] }],
+      
+      searchColumns: ["listing-title","listing-authors","listing-date","listing-journal"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -99,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./data_science_projects.html" aria-current="page"> 
+    <a class="nav-link" href="./data_science_projects.html"> 
 <span class="menu-text">Data Science Projects</span></a>
   </li>  
   <li class="nav-item">
@@ -107,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Professional Development</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link active" href="./publications.html" aria-current="page"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
@@ -131,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">My projects page</h1>
+<h1 class="title">Published Works</h1>
 </div>
 
 
@@ -151,7 +211,180 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+Title
+</th>
+
+<th>
+Authors
+</th>
+
+<th>
+Date
+</th>
+
+<th>
+Journal
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-listing-date-sort="1740632400000" data-listing-title-sort="Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees">
+<td>
+<a href="https://doi.org/10.1038/s41598-025-89818-z" class="title listing-title">Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees</a>
+</td>
+<td>
+<span class="listing-authors">Mulligan, CJ; <strong>Quinn, EB</strong>; Hamadmad, D; Dutton, CL; Nevell, L; Binder, AM; Panter-Brick, C; Dajani, R</span>
+</td>
+<td>
+<span class="listing-date">Feb 27, 2025</span>
+</td>
+<td>
+<span class="listing-journal"><em>Scientific Reports</em></span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-listing-date-sort="1698379200000" data-listing-title-sort="Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo">
+<td>
+<a href="https://doi.org/10.1002/ajpa.24862" class="title listing-title">Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo</a>
+</td>
+<td>
+<span class="listing-authors">Hsiao, CJ; <strong>Quinn, EB</strong>; Maisha, FM; Nevell, LD; Mulligan, CJ</span>
+</td>
+<td>
+<span class="listing-date">Oct 27, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>American Journal of Biological Anthropology</em></span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-listing-date-sort="1677474000000" data-listing-title-sort="Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial">
+<td>
+<a href="https://doi.org/10.1177/02692155231157301" class="title listing-title">Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial</a>
+</td>
+<td>
+<span class="listing-authors"><strong>Quinn, EB</strong>; LeLaurin, JH; Eliazar-Macke, ND; Orozco, T; Montague, M; Freytes, IM; Uphold, CR</span>
+</td>
+<td>
+<span class="listing-date">Feb 27, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>Clincial Rehabilitation</em></span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-listing-date-sort="1680840000000" data-listing-title-sort="Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome">
+<td>
+<a href="https://doi.org/10.3390/microorganisms11040975" class="title listing-title">Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome</a>
+</td>
+<td>
+<span class="listing-authors">Dutton, CL; Maisha, FM; <strong>Quinn, EB</strong>; Morales, KL; Moore, JM; Mulligan, CJ</span>
+</td>
+<td>
+<span class="listing-date">Apr 7, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>Microorganisms</em></span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-listing-date-sort="1686369600000" data-listing-title-sort="Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation">
+<td>
+<a href="https://doi.org/10.1080/15592294.2023.2222473" class="title listing-title">Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation</a>
+</td>
+<td>
+<span class="listing-authors"><strong>Quinn, EB</strong>; Hsiao, CJ; Maisha, FM; Mulligan, CJ</span>
+</td>
+<td>
+<span class="listing-date">Jun 10, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>Epigenetics</em></span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-listing-date-sort="1688097600000" data-listing-title-sort="Low birthweight is associated with epigenetic age acceleration in the first 3 years of life">
+<td>
+<a href="https://doi.org/10.1093/emph/eoad019" class="title listing-title">Low birthweight is associated with epigenetic age acceleration in the first 3 years of life</a>
+</td>
+<td>
+<span class="listing-authors"><strong>Quinn, EB</strong>; Hsiao, CJ; Maisha, FM; Mulligan, CJ</span>
+</td>
+<td>
+<span class="listing-date">Jun 30, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>Evolution, Medicine, and Public Health</em></span>
+</td>
+
+</tr>
+
+<tr data-index="6" data-listing-date-sort="1689998400000" data-listing-title-sort="The social patterning of vicarious discrimination: Implications for health equity">
+<td>
+<a href="https://doi.org/10.1016/j.socscimed.2023.116104" class="title listing-title">The social patterning of vicarious discrimination: Implications for health equity</a>
+</td>
+<td>
+<span class="listing-authors"><strong>Quinn, EB</strong>; Ross, JD; Boston, PQ; HEAT Steering Committee; Mulligan, CJ; Gravlee, CC</span>
+</td>
+<td>
+<span class="listing-date">Jul 22, 2023</span>
+</td>
+<td>
+<span class="listing-journal"><em>Social Science &amp; Medicine</em></span>
+</td>
+
+</tr>
+
+<tr data-index="7" data-listing-date-sort="1648872000000" data-listing-title-sort="Associations between perceived discrimination and immune cell composition in the Jackson Heart Study">
+<td>
+<a href="https://doi.org/10.1016/j.bbi.2022.03.017" class="title listing-title">Associations between perceived discrimination and immune cell composition in the Jackson Heart Study</a>
+</td>
+<td>
+<span class="listing-authors">Aronoff, JE; <strong>Quinn, EB</strong>; Forde, AT; Glover, LM; Reiner, A; McDade, TW; Sims, M</span>
+</td>
+<td>
+<span class="listing-date">Apr 2, 2022</span>
+</td>
+<td>
+<span class="listing-journal"><em>Brain, Behavior, and Immunity</em></span>
+</td>
+
+</tr>
+
+<tr data-index="8" data-listing-date-sort="1563940800000" data-listing-title-sort="Region-specific regulation of stem cell-driven regeneration in tapeworms">
+<td>
+<a href="https://doi.org/10.7554/eLife.48958" class="title listing-title">Region-specific regulation of stem cell-driven regeneration in tapeworms</a>
+</td>
+<td>
+<span class="listing-authors">Rozario, T; <strong>Quinn, EB</strong>; Wang, J; Davis, RE; Newmark, PA</span>
+</td>
+<td>
+<span class="listing-date">Jul 24, 2019</span>
+</td>
+<td>
+<span class="listing-journal"><em>eLife</em></span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">No matching items</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
