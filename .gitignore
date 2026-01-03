@@ -1,3 +1,4 @@
 /.quarto/
 **/*.quarto_ipynb
-renv/
+/renv/
+/docs/
