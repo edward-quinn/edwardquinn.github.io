@@ -1,5 +1,7 @@
 ---
-title: "my book notes page"
+title: "Technical Notes"
+subtitle: "Below are links to repositories containing my notes on technical books I have read for professional development"
+date: today
 ---
 
 # Technical Publication Notes
