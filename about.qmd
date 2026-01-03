@@ -1,3 +1,34 @@
 ---
-title: "my about page"
+subtitle: "Edward B. Quinn, PhD, MPH <br> edward.bruce.quinn@gmail.com"
+
+image: edward_quinn_min.jpeg
+about:
+    template: trestles
+    image-width: 20em
+    image-shape: round
+    links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/edwardbquinn/
+    - icon: github
+      text: Github
+      href: https://github.com/edward-quinn
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com/citations?hl=en&user=sL13dZIAAAAJ&view_op=list_works&sortby=pubdate
 ---
+
+# Experienced Data Scientist
+
+I have over 10 years of experience conducting research and data analyses. Here are some solutions I can build for you:
+
+-   **Automated Report Generation**
+    - Instantly incorporate new data into your performance metrics. Stop waiting days for a report.
+-   **High-Powered Dashboards**
+    - Go beyond common, limited BI tools to customized dashboards with advanced statistical analysis.
+-   **Scalable Statistical Inference**
+    - Use data to understand patterns among your clients, whether there are hundreds or millions of them. 
+-   **Insightful Data Visualization**
+    - Highly customized graphs to get the most from your data. Thousands of them.
+-   **Prediction with Machine Learning**
+    - Use powerful machine learning algorithms to predict client behavior.

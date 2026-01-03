@@ -1,6 +1,6 @@
 ---
 title: "Welcome!"
-subtitle: "You can find my projects, technical notes, publications, and resume on this site."
+subtitle: "You can find my projects, technical notes, publications, and resume on this site. My professional experience is plotted below."
 lightbox: true
 ---
 
@@ -76,7 +76,7 @@ ggplot(df_plot, aes(
   scale_x_date(
     date_labels = "%Y",
     date_breaks = "2 years",
-    expand = expansion(mult = c(0.01, 0.05))
+    expand = expansion(mult = c(0.01, 0.15))
   ) +
   scale_color_brewer(palette = "Dark2") +
   labs(

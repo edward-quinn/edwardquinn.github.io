@@ -4,7 +4,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Edward Quinn, PhD, MPH"
+  title: "Edward B. Quinn, PhD, MPH"
   navbar:
     left:
       - text: "Home"
