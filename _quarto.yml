@@ -19,6 +19,11 @@ website:
         href: "publications.qmd"
       - text: "Resume"
         href: resume.qmd
+    tools:
+      - href: https://github.com/edward-quinn
+        icon: github
+      - href: https://www.linkedin.com/in/edwardbquinn/
+        icon: linkedin
 
 
 format:
