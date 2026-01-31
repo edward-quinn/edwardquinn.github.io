@@ -11,6 +11,7 @@ bibliography: professional_development.bib
 -   [Advanced R Notes](https://edward-quinn.github.io/advanced-r-notes/){.external target="_blank"}
  covering @wickham_advanced_2019.
 
- ## R for Data Science, 2nd Edition
+
+## R for Data Science, 2nd Edition
 
  -  [R for Data Science, 2nd Edition Notes](https://edward-quinn.github.io/r4ds-2e-notes/){.external target="_blank"} covering @wickham_r_2023.
