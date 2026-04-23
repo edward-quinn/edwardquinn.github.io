@@ -10,60 +10,55 @@ lightbox: true
 #| include: false
 
 library(tidyverse)
-
+library(gganimate)
+library(av)
 ```
 
 
 ```{r}
 #| include: false
 
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+
+
+
+# --- Data ---
 df <- tibble(
   activity = c(
-    "Graduate Research Assistant", "Graduate Research Assistant", "Human Biomarkers Researcher",
+    "Human Biomarkers Researcher",
     "Assistant Research Specialist", "MA in Medical Anthropology", "PhD in Biological Anthropology",
     "Graduate Research Assistant", "Data Analyst", "Graduate Research Assistant",
-    "Senior Data Analyst", "Compliance and Data Officer", "Data Science Consultant",
+    "Senior Data Analyst", "Data Officer", "Data Consultant",
     "MPH Epidemiology Track", "Statistician", "World Travel"
   ),
   start_date = c(
-    "August 2014", "May 2015", "May 2016", "September 2016", "August 2014", "August 2018",
+    "May 2016", "September 2016", "August 2014", "August 2018",
     "August 2018", "June 2021", "August 2018", "March 2023", "May 2024", "May 2024", "August 2019",
     "October 2025", "April 2025"
   ),
   end_date = c(
-    "December 2014", "May 2016", "August 2016", "June 2018", "May 2016", "December 2022",
-    "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024", "December 2021", "February 2026", "September 2025"
+    "August 2016", "June 2018", "May 2016", "December 2022",
+    "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024",
+    "December 2021", "February 2026", "September 2025"
   ),
   activity_type = c(
-    "Research", "Research", "Research", "Research", "Education", "Education",
+    "Research", "Research", "Education", "Education",
     "Research", "Data Analysis", "Research", "Data Analysis", "Data Analysis",
     "Data Analysis", "Education", "Data Analysis", "Fun"
   )
+) |>
+ mutate(
+  start_date = parse_date_time(paste0(start_date, "-01"), orders = "B Y-d"),
+  end_date   = parse_date_time(paste0(end_date, "-01"), orders = "B Y-d")
 ) |> 
-  mutate(
-    start_date = parse_date_time(paste0(start_date, "-01"), orders = "B Y-d"),
-    end_date   = parse_date_time(paste0(end_date, "-01"), orders = "B Y-d")
-  ) |> 
-  arrange(desc(start_date))
+  arrange(start_date) |>
+  mutate(activity = fct_reorder(activity, start_date))
 
-df
-
-
-```
-
-
-```{r}
-#| echo: false
-#| fig-width: 12
-#| fig-asp: 0.618
-#| fig-align: left
-
-df_plot <- df |> 
-  mutate(
-    activity = fct_reorder(activity, start_date)
-  )
-
-ggplot(df_plot, aes(
+# --- Plot ---
+anim <- ggplot(df, aes(
   y = activity,
   x = start_date,
   xend = end_date,
@@ -73,28 +68,142 @@ ggplot(df_plot, aes(
     linewidth = 6,
     lineend = "round"
   ) +
-  scale_x_date(
+  geom_text(
+    aes(x = end_date, label = activity),
+    hjust = -0.2,
+    size = 5,
+    color = "black"
+  ) +
+  scale_x_datetime(
     date_labels = "%Y",
     date_breaks = "2 years",
-    expand = expansion(mult = c(0.01, 0.15))
+    limits = c(
+      min(df$start_date),
+      max(df$end_date) + months(12)
+    ),
+    ,
+    expand = expansion(mult = c(0.01, 0.25))  # extra space for labels
   ) +
+  coord_cartesian(clip = "off") +
   scale_color_brewer(palette = "Dark2") +
   labs(
     title = "Professional Timeline",
+    subtitle = "Year: {frame_along}",
     x = NULL,
-    y = NULL,
-    color = "Activity Type"
+    y = NULL
   ) +
-  theme_minimal(base_size = 20) +
+  theme_minimal(base_size = 15) +
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.minor = element_blank(),
-    axis.text.y = element_text(size = 16),
-    axis.text.x = element_text(color = "grey30"),
-    plot.title = element_text(face = "bold", size = 16),
-    plot.subtitle = element_text(color = "grey40"),
     legend.position = "bottom",
-    legend.title = element_blank()
-  )
+    plot.margin = margin(5.5, 80, 5.5, 5.5)
+  ) +
+  transition_reveal(along = start_date) +   # 👈 key change
+  ease_aes("linear") +
+  transition_time(start_date) +   # 👈 key upgrade
+  shadow_mark(past = TRUE, future = FALSE) +
+  ease_aes("linear")
+
+# --- Render MP4 ---
+animate(
+  anim,
+  width = 800,
+  height = 500,
+  units = "px",
+  fps = 24,
+  duration = 10,
+  renderer = av_renderer("timeline.mp4"),
+  device = "ragg_png"
+)
+
+
+```
+
+<video autoplay loop muted playsinline width="100%">
+  <source src="timeline.mp4" type="video/mp4">
+</video>
+
+
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-asp: 0.618
+#| fig-align: left
+#| cache: true
+
+# df_plot <- df |> 
+#   mutate(
+#     activity = fct_reorder(activity, start_date),
+#     label = activity
+#   )
+
+
+# p_anim <- ggplot(df_plot, aes(
+#   y = activity,
+#   x = start_date,
+#   xend = end_date,
+#   color = activity_type
+# )) +
+#   geom_segment(
+#     linewidth = 6,
+#     lineend = "round"
+#   ) +
+
+#   # 👇 Labels appear dynamically
+#   geom_text(
+#     aes(x = end_date, label = label),
+#     hjust = -0.1,
+#     size = 5,
+#     color = "black"
+#   ) +
+
+#   scale_x_date(
+#     date_labels = "%Y",
+#     date_breaks = "2 years",
+#     expand = expansion(mult = c(0.01, 0.25))  # extra space for labels
+#   ) +
+#   scale_color_brewer(palette = "Dark2") +
+#   labs(
+#     title = "Professional Timeline",
+#     x = NULL,
+#     y = NULL
+#   ) +
+#   theme_minimal(base_size = 20) +
+#   theme(
+#     panel.grid.major.y = element_blank(),
+#     panel.grid.minor = element_blank(),
+#     legend.position = "bottom"
+#   ) +
+
+#   # 👇 Animation
+#   transition_time(start_date) +
+
+#   # 👇 Keeps past elements visible (critical)
+#   shadow_mark(past = TRUE, future = FALSE) +
+
+#   ease_aes("linear") +
+  
+#   enter_fade() + 
+#   exit_fade() +
+#   transition_reveal(along = start_date)
+
+
+
+# animate(
+#   p_anim,
+#   width = 100,
+#   height = 100,
+#   units = "px",
+#   fps = 20,
+#   duration = 8,
+#   renderer = gifski_renderer(loop = TRUE),
+#   device = "ragg_png"
+# )
+
+
+
+
 
 ```
