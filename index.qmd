@@ -65,7 +65,7 @@ anim <- ggplot(df, aes(
   color = activity_type
 )) +
   geom_segment(
-    linewidth = 6,
+    linewidth = 5,
     lineend = "round"
   ) +
   geom_text(
@@ -86,7 +86,7 @@ anim <- ggplot(df, aes(
   scale_color_brewer(palette = "Dark2") +
   labs(
     title = "Professional Timeline",
-    subtitle = "Year: {format(frame_along, '%Y')}",
+    subtitle = "Year: {format(frame_along, '%Y-%m')}",
     x = NULL,
     y = NULL,
     color = NULL   # 👈 removes legend title
@@ -95,7 +95,7 @@ anim <- ggplot(df, aes(
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.minor = element_blank(),
-    legend.position = "none",
+    legend.position = "bottom",
     plot.margin = margin(5.5, 40, 5.5, 5.5)
   ) +
   transition_reveal(along = start_date) +
@@ -109,8 +109,8 @@ animate(
   width = 1200,
   height = 676,
   units = "px",
-  fps = 24,
-  duration = 10,
+  fps = 12,
+  duration = 20,
   renderer = av_renderer("timeline.mp4"),
   device = "ragg_png"
 )
@@ -119,10 +119,11 @@ animate(
 ```
 
 <div style="max-width: 800px; margin: 2rem auto;">
-  <video autoplay loop muted playsinline style="width:100%; height:auto;">
+  <video autoplay controls playsinline style="width:100%; height:auto;">
     <source src="timeline.mp4" type="video/mp4">
   </video>
 </div>
+
 
 
 
