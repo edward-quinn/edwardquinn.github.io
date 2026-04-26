@@ -1,0 +1,222 @@
+---
+title: "CMS Data Analysis"
+description: "Exploring Medicare and Medicaid spending trends using CMS data."
+date: 2026-04-01
+categories: [Healthcare, R, Policy]
+image: preview.png
+---
+
+
+## Overview
+This project analyzes CMS Medicare and Medicaid datasets...
+
+```{r}
+
+library(tidyverse)
+library(httr2)
+library(nanoparquet)
+library(janitor)
+
+```
+
+Use httr2 to download the CMS datasets and read them into R for analysis. The datasets include information on Medicare spending, provider payments, and beneficiary demographics.
+
+```{r}
+
+# base_url <- "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/yv7e-xc69?show-reference-ids=false"
+
+# response <- request(base_url) |> 
+#     req_perform()
+
+# response |> 
+#     resp_body_json() |> 
+#     glimpse('distribution') 
+```
+
+```{r}
+# base_url <- "https://data.cms.gov/provider-data/api/1/datastore/query/yv7e-xc69/0?offset=0&count=true&results=true&schema=true&keys=true&format=json&rowIds=false"
+
+# response <- request(base_url) |>
+#   req_url_query(`$limit` = 10) |>
+#   req_perform()
+
+# data <- response |>
+#   resp_body_json()
+
+# glimpse(data)
+
+# data |> 
+#     pluck('results') |> 
+#     head()
+
+```
+
+giving up on this for now, the API is a bit tricky to work with and I need to focus on other projects. Will revisit in the future when I have more time to dedicate to it.
+
+```{r}
+
+# df <- read_csv("projects/hospital_analysis/Timely_and_Effective_Care-Hospital.csv")
+
+```
+
+column names are horrific
+
+```{r}
+
+# df2 <- df |> 
+#     clean_names()
+
+# glimpse(df2)
+
+```
+
+reformat columns to acceptable types and get rid of the all caps values.
+
+```{r}
+
+# df3 <- df2 |> 
+#     mutate(
+#         across(c(facility_name, address, city_town, county_parish),
+#         .fns = \(x) str_to_title(x)
+#         )
+#     ) |>
+#     mutate(
+#         across(c(start_date, end_date),
+#         .fns = \(x) mdy(x)
+#         )
+#     ) |> 
+#     select(
+#         -c(
+#             telephone_number,
+#         )
+#     )
+    
+
+```
+
+read in the csv and then reexport as a parquest file after formatting.
+
+```{r}
+
+# write_parquet(df3, "projects/hospital_analysis/cms_hospital_care.parquet")
+
+```
+
+```{r}
+
+clean_df <- read_parquet("cms_hospital_care.parquet")
+
+```
+
+```{r}
+
+glimpse(clean_df)
+
+```
+
+what measures do we have?
+
+```{r}
+
+clean_df |> 
+    distinct(measure_name) |> 
+    print(n = Inf)
+
+# not available, low, high, medium, very high. would be interesting to reference against ses or crime data to see if there are any correlations.
+clean_df |> 
+    filter(measure_name == "Emergency department volume") |>
+    count(score)
+
+clean_df |> 
+    filter(measure_name == "Improvement in Patient's Visual Function within 90 Days Following Cataract Surgery") |>
+    count(score)
+
+clean_df |> 
+    filter(measure_name == "Head CT results") |>
+    count(score)
+
+```
+
+what types of scores are available for each of the measures?
+
+```{r}
+
+clean_df |> 
+    summarize(
+        n = n(),
+        .by = c(measure_name, score)
+    ) |> 
+    # count(score) |> 
+    arrange(measure_name, score)
+
+```
+
+The possible scores are pretty different across measures. It might be best to break up the data into separate dataframes for each measure to make it easier to analyze and visualize.
+
+```{r}
+
+time_in_ed_df <- clean_df |> 
+    filter(measure_name == "Average (median) time all patients spent in the emergency department before leaving from the visit, including psychiatric/mental health patients and patients who were transferred to another facility. A lower number of minutes is better")
+
+
+```
+
+check missingness or "Not Available" values for this measure
+
+```{r}
+
+clean_time_in_ed_df <- time_in_ed_df |> 
+    mutate(
+        score = if_else(score == "Not Available", NA_character_, score),
+        score = as.numeric(score),
+        state = fct(state)
+    )
+
+library(naniar)
+miss_var_summary(clean_time_in_ed_df)
+
+
+```
+
+check distiribution of scores for this measure
+
+```{r}
+
+clean_time_in_ed_df |> 
+    ggplot(aes(x = score)) +
+    geom_histogram() +
+    facet_wrap(vars(state))
+
+```
+
+plot median by state. also want to know sample size for each state to see if there are any states with very small sample sizes that might be skewing the results.
+
+```{r}
+
+clean_time_in_ed_df |> 
+    group_by(state) |> 
+    summarize(
+        median_time = median(score, na.rm = TRUE),
+        n = n()
+    ) |> 
+    ggplot(aes(x = fct_reorder(state, median_time), y = median_time)) +
+    geom_col() +
+    geom_text(aes(label = n), vjust = -0.5) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+
+
+
+
+## Data
+- CMS Public Use Files
+- Medicare spending data
+
+## Methods
+- Data cleaning in R
+- Visualization with ggplot2
+
+## Results
+
