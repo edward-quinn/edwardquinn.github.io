@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/data_science_projects.html",
+    "items": [
+      "/projects/hospital_analysis/index.html"
+    ]
+  },
+  {
     "listing": "/publications.html",
     "items": []
   }
